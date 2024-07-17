@@ -4,7 +4,7 @@
   "description": "Node Practice Course",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon node-tute.js"
   },
   "author": "Naveen",
   "license": "ISC",

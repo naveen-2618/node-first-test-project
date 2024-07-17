@@ -1,6 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const Movies = require("./models/movie-schema")
+const Movies = require("./models/movie-schema");
+
+const testSum = require("./test-export")
 
 connectDB();
 
@@ -9,7 +11,7 @@ const myApp = express()
 myApp.use(express.json())
 
 // Server Setting
-myApp.listen(4500, console.log("Server connected to 4500"));
+//myApp.listen(4500, console.log("Server connected to 4500"));
 
 // Display Out put as HTML
 /* myApp.get("/", (req, res) => {
@@ -17,6 +19,10 @@ myApp.listen(4500, console.log("Server connected to 4500"));
 }) */
 
 // Getting output in jSon format
+myApp.get("/", (req, res) => {
+  const totalSum = testSum.sum(10, 20);
+  res.send(`The total is ${totalSum}`);
+})
 myApp.get("/", (req, res) => {
   res.json({msg: "This is sample json output"})
 })
@@ -29,7 +35,7 @@ myApp.get("/", (req, res) => {
 //   => Using DataBase  <=   //
 myApp.get("/movies/", async(req, res) => {
   try {
-    const listMovie = await Movies.find({})
+    const listMovie = await Movies.find()
     res.json({listMovie});
   } catch (error) {
     console.log(error);
